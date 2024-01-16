@@ -2,7 +2,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface Inputs {
-  fullName: string;
+  name: string;
   email: string;
   password: string;
   // confirmPassword: string;
@@ -39,7 +39,7 @@ const CreateAnAccount = () => {
               className="w-full outline-none p-3 rounded-lg bg-transparent border border-zinc-100/10"
               placeholder="Your Full Name"
               autoComplete="off"
-              {...register("fullName", { required: true })}
+              {...register("name", { required: true })}
             />
           </div>
           <div className="space-y-1">
