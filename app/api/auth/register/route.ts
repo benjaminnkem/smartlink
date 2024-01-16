@@ -1,6 +1,7 @@
 import users from "@/lib/schemas/users";
 import connectToDb from "@/lib/utils/db";
 import { NextRequest, NextResponse } from "next/server";
+import { hash } from "bcryptjs";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,7 +16,9 @@ export async function POST(req: NextRequest) {
       return new NextResponse(JSON.stringify({ error: "User already exists" }), { status: 400 });
     }
 
-    await users.create(data);
+    const password = await hash(data.password, 12);
+
+    await users.create({ ...data, password });
 
     return new NextResponse(null, { status: 201 });
   } catch (e) {
