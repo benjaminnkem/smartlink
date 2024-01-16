@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "framer-motion": "^10.18.0",
+    "gsap": "^3.12.4",
     "lucide-react": "^0.311.0",
     "mongoose": "^8.1.0",
+    "nanoid": "^5.0.4",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
