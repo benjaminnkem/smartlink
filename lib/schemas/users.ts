@@ -15,8 +15,8 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  link: String,
-  ceeLink: String,
+  link: { type: String, default: "" },
+  ceeLink: { type: String, default: "" },
   // phone: {
   //   type: String,
   //   required: true,

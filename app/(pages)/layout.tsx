@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import "../public/globals.css";
 import { satoshi } from "@/lib/utils/fonts";
 import Providers from "@/lib/utils/providers";
+import "../../public/globals.css";
 
 export const metadata: Metadata = {
   title: "Smartlink Generator",

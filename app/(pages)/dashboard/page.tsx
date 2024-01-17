@@ -13,7 +13,7 @@ const Page = () => {
   const [created, create] = useState(false);
   const [createdLink, setCreatedLink] = useState("");
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const generateLink = async () => {
     if (!link) {
@@ -29,6 +29,7 @@ const Page = () => {
     setLoading(true);
     try {
       const cryptedLink = nanoid();
+      console.log(status);
 
       const res = await publicApi.get("/api/auth/user/" + session?.user.email);
 
@@ -70,7 +71,7 @@ const Page = () => {
           {createdLink && (
             <p>
               Your smart link :{" "}
-              <Link className="font-semibold text-cyan-100" href={`/${createdLink}`}>
+              <Link className="font-semibold text-cyan-100" target="_blank" href={`/r/${createdLink}`}>
                 {createdLink}
               </Link>
             </p>
