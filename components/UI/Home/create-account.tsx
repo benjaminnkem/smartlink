@@ -69,30 +69,85 @@ const CreateAnAccount = () => {
 
   return (
     <div className="container pt-10">
-      <h2 className="text-center font-extrabold text-3xl opacity-80">Create An Account</h2>
       <AnimatePresence mode="wait">
         {!completed ? (
-          <motion.form
-            {...opacityVariant}
-            onSubmit={handleSubmit(onSubmit)}
-            key={"register"}
-            noValidate
-            className="max-w-4xl mx-auto mt-5 flex items-center justify-center"
-          >
-            <div>
-              <div className="space-y-3 p-2">
-                <div className="space-y-1">
-                  <label htmlFor="fullName" className="font-medium">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full outline-none p-3 rounded-lg bg-transparent border border-zinc-100/10"
-                    placeholder="Your Full Name"
-                    autoComplete="off"
-                    {...register("name", { required: true })}
-                  />
+          <>
+            <motion.div {...opacityVariant} key={"register"}>
+              <h2 className="text-center font-extrabold text-3xl opacity-80">Create An Account</h2>
+              <motion.form
+                {...opacityVariant}
+                onSubmit={handleSubmit(onSubmit)}
+                noValidate
+                className="max-w-4xl mx-auto mt-5 flex items-center justify-center"
+              >
+                <div>
+                  <div className="space-y-3 p-2">
+                    <div className="space-y-1">
+                      <label htmlFor="fullName" className="font-medium">
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full outline-none p-3 rounded-lg bg-transparent border border-zinc-100/10"
+                        placeholder="Your Full Name"
+                        autoComplete="off"
+                        {...register("name", { required: true })}
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="email" className="font-medium">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        className="w-full outline-none p-3 rounded-lg bg-transparent border border-zinc-100/10"
+                        placeholder="Your Email"
+                        autoComplete="off"
+                        {...register("email", { required: true })}
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="password" className="font-medium">
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        className="w-full outline-none p-3 rounded-lg bg-transparent border border-zinc-100/10"
+                        placeholder="Password"
+                        autoComplete="off"
+                        {...register("password", { required: true })}
+                      />
+                    </div>
+                    <input
+                      type="submit"
+                      value={loading ? "creating..." : `Create Account`}
+                      disabled={loading}
+                      className={`w-full p-3 rounded-lg bg-cyan-900 text-white cursor-pointer duration-300 hover:bg-cyan-800`}
+                    />
+                  </div>
+                  <p className="text-center text-sm">
+                    or{" "}
+                    <span
+                      className="border-b border-cyan-400 font-semibold cursor-pointer select-none"
+                      onClick={() => setCompleted(true)}
+                    >
+                      Login
+                    </span>
+                  </p>
                 </div>
+              </motion.form>
+            </motion.div>
+          </>
+        ) : (
+          <motion.div {...opacityVariant} key={"login"}>
+            <h2 className="text-center font-extrabold text-3xl opacity-80">Login</h2>
+            <motion.form
+              {...opacityVariant}
+              onSubmit={handleSubmitLogin(onLogin)}
+              noValidate
+              className="max-w-4xl mx-auto mt-5 flex items-center justify-center"
+            >
+              <div className="space-y-3 p-2">
                 <div className="space-y-1">
                   <label htmlFor="email" className="font-medium">
                     Email
@@ -102,7 +157,7 @@ const CreateAnAccount = () => {
                     className="w-full outline-none p-3 rounded-lg bg-transparent border border-zinc-100/10"
                     placeholder="Your Email"
                     autoComplete="off"
-                    {...register("email", { required: true })}
+                    {...registerLogin("email", { required: true })}
                   />
                 </div>
                 <div className="space-y-1">
@@ -114,68 +169,18 @@ const CreateAnAccount = () => {
                     className="w-full outline-none p-3 rounded-lg bg-transparent border border-zinc-100/10"
                     placeholder="Password"
                     autoComplete="off"
-                    {...register("password", { required: true })}
+                    {...registerLogin("password", { required: true })}
                   />
                 </div>
                 <input
                   type="submit"
-                  value={loading ? "creating..." : `Create Account`}
+                  value={loading ? "hold..." : `Login`}
                   disabled={loading}
                   className={`w-full p-3 rounded-lg bg-cyan-900 text-white cursor-pointer duration-300 hover:bg-cyan-800`}
                 />
               </div>
-              <p className="text-center text-sm">
-                or{" "}
-                <span
-                  className="border-b border-cyan-400 font-semibold cursor-pointer select-none"
-                  onClick={() => setCompleted(true)}
-                >
-                  Login
-                </span>
-              </p>
-            </div>
-          </motion.form>
-        ) : (
-          <motion.form
-            {...opacityVariant}
-            onSubmit={handleSubmitLogin(onLogin)}
-            key={"login"}
-            noValidate
-            className="max-w-4xl mx-auto mt-5 flex items-center justify-center"
-          >
-            <div className="space-y-3 p-2">
-              <div className="space-y-1">
-                <label htmlFor="email" className="font-medium">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full outline-none p-3 rounded-lg bg-transparent border border-zinc-100/10"
-                  placeholder="Your Email"
-                  autoComplete="off"
-                  {...registerLogin("email", { required: true })}
-                />
-              </div>
-              <div className="space-y-1">
-                <label htmlFor="password" className="font-medium">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  className="w-full outline-none p-3 rounded-lg bg-transparent border border-zinc-100/10"
-                  placeholder="Password"
-                  autoComplete="off"
-                  {...registerLogin("password", { required: true })}
-                />
-              </div>
-              <input
-                type="submit"
-                value={loading ? "hold..." : `Login`}
-                disabled={loading}
-                className={`w-full p-3 rounded-lg bg-cyan-900 text-white cursor-pointer duration-300 hover:bg-cyan-800`}
-              />
-            </div>
-          </motion.form>
+            </motion.form>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
