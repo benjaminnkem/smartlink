@@ -1,10 +1,13 @@
 import users from "@/lib/schemas/users";
 import { NextRequest, NextResponse } from "next/server";
 import { compare } from "bcryptjs";
+import connectToDb from "@/lib/utils/db";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+
+    await connectToDb();
 
     const userWithEmail = await users.findOne({ email: body.email });
 

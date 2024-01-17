@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../public/globals.css";
 import { satoshi } from "@/lib/utils/fonts";
+import Providers from "@/lib/utils/providers";
 
 export const metadata: Metadata = {
   title: "Smartlink Generator",
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={satoshi.className}>{children}</body>
+      <body className={satoshi.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
