@@ -7,6 +7,8 @@ import Link from "next/link";
 import { publicApi } from "@/lib/configs/axiosInstance";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { opacityVariant } from "@/lib/utils/variants";
 
 const Page = () => {
   const [link, setLink] = useState("");
@@ -75,12 +77,12 @@ const Page = () => {
           </button>
 
           {createdLink && (
-            <p>
+            <motion.p {...opacityVariant}>
               Your smart link :{" "}
               <Link className="font-semibold text-cyan-100" target="_blank" href={`/r/${createdLink}`}>
                 {createdLink}
               </Link>
-            </p>
+            </motion.p>
           )}
         </div>
 

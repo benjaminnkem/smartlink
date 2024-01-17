@@ -1,7 +1,7 @@
 "use client";
 
 import { ToastOptions, Toaster } from "react-hot-toast";
-import AuthProvider from "./aurh-provider";
+import AuthProvider from "./auth-provider";
 import { SessionProvider } from "next-auth/react";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
