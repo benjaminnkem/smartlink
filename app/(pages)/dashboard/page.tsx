@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import Link from "next/link";
 import { publicApi } from "@/lib/configs/axiosInstance";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [link, setLink] = useState("");
@@ -14,6 +15,7 @@ const Page = () => {
   const [createdLink, setCreatedLink] = useState("");
 
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   const generateLink = async () => {
     if (!link) {
@@ -26,10 +28,9 @@ const Page = () => {
       return;
     }
 
-    setLoading(true);
     try {
+      setLoading(true);
       const cryptedLink = nanoid();
-      console.log(status);
 
       const res = await publicApi.get("/api/auth/user/" + session?.user.email);
 
@@ -41,6 +42,11 @@ const Page = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const logout = () => {
+    signOut({ redirect: false });
+    router.replace("/");
   };
 
   return (
@@ -79,7 +85,7 @@ const Page = () => {
         </div>
 
         <div className="mt-12 container">
-          <div className="font-semibold text-red-200 cursor-pointer select-none" onClick={() => signOut()}>
+          <div className="font-semibold text-red-200 cursor-pointer select-none" onClick={logout}>
             Logout
           </div>
         </div>
