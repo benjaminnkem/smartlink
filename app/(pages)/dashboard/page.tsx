@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { nanoid } from "nanoid";
 import Link from "next/link";
 import { publicApi } from "@/lib/configs/axiosInstance";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const Page = () => {
   const [link, setLink] = useState("");
@@ -76,6 +76,12 @@ const Page = () => {
               </Link>
             </p>
           )}
+        </div>
+
+        <div className="mt-12 container">
+          <div className="font-semibold text-red-200 cursor-pointer select-none" onClick={() => signOut()}>
+            Logout
+          </div>
         </div>
       </main>
     </>
